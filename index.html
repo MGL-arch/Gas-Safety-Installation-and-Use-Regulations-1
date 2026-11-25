@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="handbook">
+  <title>GSIUR 1998 Revision Quiz Dashboard — Regulations 2 to 32</title>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #ffffff;
+      --surface-container-low: #f3f2f1;
+      --surface-container: #e8e7e5;
+      --surface-container-high: #dbdad9;
+
+      /* Ink */
+      --on-surface: #0b0c0c;
+      --on-surface-variant: #505a5f;
+
+      /* Rules */
+      --outline: #0b0c0c;
+      --outline-variant: #b1b4b6;
+
+      /* Accents */
+      --primary: #162e51;
+      --on-primary: #ffffff;
+      --primary-container: #d2e2f1;
+      --on-primary-container: #0c2d4a;
+      --secondary: #4c2c92;
+      --tertiary: #1a569e;
+      --error: #d4351c;
+      --on-error: #ffffff;
+
+      /* Data series */
+      --data-1: #1a569e;
+      --data-2: #c75a0a;
+      --data-3: #28a197;
+      --data-4: #4c2c92;
+      --data-context: #b1b4b6;
+
+      /* Fonts */
+      --font-headline: 'Public Sans', sans-serif;
+      --font-body: 'Public Sans', sans-serif;
+      --font-label: 'Public Sans', sans-serif;
+
+      /* Shape */
+      --rounded: 0;
+      --rounded-lg: 0;
+      --rounded-full: 0;
+
+      /* Style effects */
+      --top-index-rule: 6px solid var(--primary);
+      --inset-rule: 5px solid var(--tertiary);
+      --button-ground-color: #091526;
+      --button-ground-secondary-color: #858686;
+      --button-ground: 0 2px 0 var(--button-ground-color);
+      --button-ground-secondary: 0 2px 0 var(--button-ground-secondary-color);
+      --focus-yellow: #ffdd00;
+      --focus-ring: 3px solid var(--focus-yellow);
+      --focus-bar: inset 0 0 0 2px var(--on-surface);
+      --focus-underline: 0 -2px var(--focus-yellow), 0 4px var(--on-surface);
+
+      /* Shared semantic tokens */
+      --positive: #006837;
+      --positive-bg: #e6f2ec;
+      --positive-ink: #004d28;
+      --warning: #b54d05;
+      --warning-bg: #fdf0e6;
+      --warning-ink: #7a3200;
+      --error-rule: 5px solid var(--error);
+      --positive-rule: 5px solid var(--positive);
+      --warning-rule: 5px solid var(--warning);
+      --focus: var(--primary);
+
+      /* Dashboard type scale */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; margin: 0; padding: 0; }
+    header { position: static !important; }
+
+    body {
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Top Index Bar (Treatment 1) */
+    .index-header {
+      border-top: var(--top-index-rule);
+      border-bottom: 1px solid var(--on-surface);
+      padding: var(--space-sm) 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface);
+    }
+
+    .page-header {
+      display: grid;
+      gap: var(--space-sm);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    h1 {
+      margin: var(--space-sm) 0 0 0;
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--display-size);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--on-surface);
+    }
+
+    h2 {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--headline-size);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--on-surface);
+    }
+
+    h3 {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--subhead-size);
+      line-height: 1.25;
+      color: var(--on-surface);
+    }
+
+    p {
+      margin: 0;
+      max-width: 68ch;
+    }
+
+    .lede {
+      font-size: var(--subhead-size);
+      color: var(--on-surface);
+      line-height: 1.45;
+    }
+
+    .source-note {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+
+    /* Top-line KPI strip */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .inset {
+      border-left: var(--inset-rule);
+      background: var(--surface-container-low);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .kpi-card {
+      display: grid;
+      gap: var(--space-xs);
+      align-content: start;
+    }
+
+    .kpi-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .kpi-value {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--headline-size);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+    }
+
+    .kpi-desc {
+      font-size: 0.875rem;
+      color: var(--on-surface);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--surface-container);
+      margin-top: var(--space-xs);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--data-1);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    /* Main two-column asymmetric layout */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .main-column {
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    .side-column {
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    /* Filter and control bar */
+    .controls-panel {
+      border-top: 2px solid var(--on-surface);
+      border-bottom: 1px solid var(--outline-variant);
+      padding: var(--space-md) 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto;
+      gap: var(--space-md);
+      align-items: end;
+    }
+
+    .field-group {
+      display: grid;
+      gap: var(--space-xs);
+      align-content: start;
+    }
+
+    label.field-label {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--body-size);
+      color: var(--on-surface);
+    }
+
+    select.handbook-select {
+      font-family: inherit;
+      font-size: var(--body-size);
+      color: var(--on-surface);
+      background: var(--background);
+      border: 2px solid var(--outline);
+      border-radius: var(--rounded);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-xl) var(--space-sm) var(--space-sm);
+      width: 100%;
+      cursor: pointer;
+    }
+
+    select.handbook-select:focus-visible {
+      outline: var(--focus-ring);
+      outline-offset: 0;
+      box-shadow: var(--focus-bar);
+    }
+
+    /* Grounded action buttons (Treatment 3) */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--body-size);
+      line-height: 1.2;
+      background: var(--primary);
+      color: var(--on-primary);
+      border: 0;
+      border-radius: var(--rounded);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      box-shadow: var(--button-ground);
+      cursor: pointer;
+      text-align: left;
+      transition: background-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+
+    .button:hover:not(:disabled) {
+      background: var(--on-primary-container);
+    }
+
+    .button:active:not(:disabled) {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
+    .button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .button--secondary {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      box-shadow: var(--button-ground-secondary);
+    }
+
+    .button--secondary:hover:not(:disabled) {
+      background: var(--surface-container);
+    }
+
+    .button--outline {
+      background: var(--background);
+      color: var(--on-surface);
+      border: 2px solid var(--outline);
+      box-shadow: var(--button-ground-secondary);
+    }
+
+    .button--outline:hover:not(:disabled) {
+      background: var(--surface-container-low);
+    }
+
+    .button:focus-visible {
+      outline: var(--focus-ring);
+      outline-offset: 0;
+      box-shadow: var(--focus-bar);
+    }
+
+    /* Status tag */
+    .status-tag {
+      display: inline-block;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+    }
+
+    .status-tag--positive {
+      background: var(--positive-bg);
+      color: var(--positive-ink);
+    }
+
+    .status-tag--warning {
+      background: var(--warning-bg);
+      color: var(--warning-ink);
+    }
+
+    /* Step badge */
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      height: 28px;
+      padding: 0 var(--space-xs);
+      background: var(--primary);
+      color: var(--on-primary);
+      font-weight: 800;
+      font-size: 0.8125rem;
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+
+    /* Question card */
+    .quiz-wrapper {
+      container-type: inline-size;
+    }
+
+    .question-card {
+      display: grid;
+      gap: var(--space-lg);
+      padding: var(--space-lg) 0;
+      border-bottom: 2px solid var(--on-surface);
+    }
+
+    .question-card--list {
+      border-bottom: 1px solid var(--outline-variant);
+      padding: var(--space-lg) 0;
+    }
+
+    .question-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .question-meta-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .question-stem {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--headline-size);
+      line-height: 1.25;
+      color: var(--on-surface);
+      max-width: 65ch;
+    }
+
+    .options-list {
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .option-btn {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr) auto;
+      gap: var(--space-md);
+      align-items: center;
+      width: 100%;
+      min-height: 48px;
+      padding: var(--space-md);
+      background: var(--background);
+      color: var(--on-surface);
+      border: 2px solid var(--outline);
+      border-radius: var(--rounded);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.45;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: var(--surface-container-low);
+    }
+
+    .option-btn:focus-visible {
+      outline: var(--focus-ring);
+      outline-offset: 0;
+      box-shadow: var(--focus-bar);
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border: 1px solid var(--outline);
+      font-weight: 800;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .option-btn--correct {
+      background: var(--positive-bg);
+      border-color: var(--positive);
+      box-shadow: inset 5px 0 0 var(--positive);
+    }
+
+    .option-btn--correct .option-letter {
+      background: var(--positive);
+      color: var(--on-primary);
+      border-color: var(--positive);
+    }
+
+    .option-btn--incorrect {
+      background: var(--background);
+      border-color: var(--error);
+      box-shadow: inset 5px 0 0 var(--error);
+    }
+
+    .option-btn--incorrect .option-letter {
+      background: var(--error);
+      color: var(--on-error);
+      border-color: var(--error);
+    }
+
+    .option-status-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .option-status-icon--correct {
+      color: var(--positive-ink);
+    }
+
+    .option-status-icon--incorrect {
+      color: var(--error);
+    }
+
+    /* Legal Explanation Callout */
+    .explanation-box {
+      border-left: var(--inset-rule);
+      background: var(--background);
+      padding: var(--space-md) var(--space-lg);
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .explanation-box--correct {
+      border-left: var(--positive-rule);
+      background: var(--surface-container-low);
+    }
+
+    .explanation-box--incorrect {
+      border-left: var(--error-rule);
+      background: var(--background);
+      border-top: 1px solid var(--outline-variant);
+      border-right: 1px solid var(--outline-variant);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    .explanation-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .verdict-text {
+      font-weight: 800;
+      font-size: var(--subhead-size);
+    }
+
+    .verdict-text--correct {
+      color: var(--positive);
+    }
+
+    .verdict-text--incorrect {
+      color: var(--error);
+    }
+
+    .explanation-body {
+      color: var(--on-surface);
+      font-size: var(--body-size);
+      line-height: 1.55;
+      max-width: 65ch;
+    }
+
+    .quiz-nav-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+      padding-top: var(--space-sm);
+    }
+
+    /* Side column sections */
+    .side-section {
+      display: grid;
+      gap: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 2px solid var(--on-surface);
+    }
+
+    /* 30-Question Matrix */
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: var(--space-xs);
+    }
+
+    .matrix-tile {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: var(--space-xs);
+      background: var(--background);
+      color: var(--on-surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.8125rem;
+      font-variant-numeric: tabular-nums;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .matrix-tile:hover {
+      background: var(--surface-container-low);
+    }
+
+    .matrix-tile:focus-visible {
+      outline: var(--focus-ring);
+      outline-offset: 0;
+      box-shadow: var(--focus-bar);
+    }
+
+    .matrix-tile--active {
+      border-width: 2px;
+      box-shadow: inset 0 0 0 2px var(--primary);
+    }
+
+    .matrix-tile--correct {
+      background: var(--positive-bg);
+      color: var(--positive-ink);
+      border-color: var(--positive);
+    }
+
+    .matrix-tile--incorrect {
+      background: var(--background);
+      color: var(--error);
+      border-color: var(--error);
+      box-shadow: inset 0 -4px 0 var(--error);
+    }
+
+    .matrix-tile--flagged::after {
+      content: "F";
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.625rem;
+      font-weight: 800;
+      color: var(--warning);
+    }
+
+    .matrix-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      border: 1px solid var(--outline);
+    }
+
+    .legend-swatch--correct {
+      background: var(--positive-bg);
+      border-color: var(--positive);
+    }
+
+    .legend-swatch--incorrect {
+      background: var(--background);
+      border-color: var(--error);
+      box-shadow: inset 0 -3px 0 var(--error);
+    }
+
+    .legend-swatch--unanswered {
+      background: var(--background);
+    }
+
+    /* Handbook ruled table */
+    table.handbook-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    table.handbook-table th {
+      text-align: left;
+      font-weight: 700;
+      padding: var(--space-sm) var(--space-xs);
+      border-bottom: 2px solid var(--on-surface);
+      color: var(--on-surface);
+    }
+
+    table.handbook-table th.num,
+    table.handbook-table td.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    table.handbook-table td {
+      padding: var(--space-sm) var(--space-xs);
+      border-bottom: 1px solid var(--outline-variant);
+      vertical-align: middle;
+    }
+
+    .part-row-btn {
+      background: none;
+      border: 0;
+      padding: 0;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 700;
+      color: var(--tertiary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .part-row-btn:hover {
+      text-decoration-thickness: 3px;
+    }
+
+    .part-row-btn:focus-visible {
+      outline: none;
+      background: var(--focus-yellow);
+      color: var(--on-surface);
+      text-decoration: none;
+      box-shadow: var(--focus-underline);
+    }
+
+    .mini-bar-track {
+      width: 64px;
+      height: 8px;
+      background: var(--surface-container-low);
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: var(--space-xs);
+    }
+
+    .mini-bar-fill {
+      height: 100%;
+      background: var(--data-1);
+    }
+
+    .mini-bar-fill--warn {
+      background: var(--data-2);
+    }
+
+    /* Summary list */
+    .summary-list {
+      display: grid;
+      margin: 0;
+      padding: 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-md);
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--outline-variant);
+      font-size: 0.875rem;
+    }
+
+    .summary-key {
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .summary-val {
+      color: var(--on-surface);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .action-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .inline-status-msg {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      min-height: 1.25em;
+    }
+
+    .empty-state {
+      border-left: var(--inset-rule);
+      background: var(--surface-container-low);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+      justify-items: start;
+    }
+
+    /* Container query adaptation inside quiz wrapper */
+    @container (max-width: 460px) {
+      .option-btn {
+        grid-template-columns: 28px minmax(0, 1fr);
+      }
+      .option-status-icon {
+        grid-column: 2;
+      }
+    }
+
+    /* Responsive layout */
+    @media (max-width: 960px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .workspace-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .controls-panel {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-md);
+      }
+      .kpi-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .controls-panel {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .matrix-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+    <header class="page-header">
+      <div class="index-header">
+        <span>UK Statutory Revision · GSIUR 1998</span>
+        <span>Regulations 2 to 32 · 30 Questions</span>
+      </div>
+      <h1>GSIUR 1998 Revision Quiz Dashboard</h1>
+      <p class="lede">
+        Test your knowledge of the Gas Safety (Installation and Use) Regulations 1998 across Regulations 2 to 32, including Regulation 2 legal definitions, DIY duties, emergency controls, installation pipework, and gas appliances.
+      </p>
+      <p class="source-note">
+        Grounded in the Gas Safety (Installation and Use) Regulations 1998 as amended and HSE Approved Code of Practice and guidance L56 (5th edition, 2018).
+      </p>
+    </header>
+
+    <!-- KPI Summary Strip -->
+    <section aria-label="Revision score summary" class="kpi-grid">
+      <div class="inset kpi-card">
+        <span class="kpi-label">Score</span>
+        <span class="kpi-value" id="kpi-score">0 / 30</span>
+        <span class="kpi-desc" id="kpi-accuracy">0% accuracy on answered items</span>
+      </div>
+      <div class="inset kpi-card">
+        <span class="kpi-label">Progress</span>
+        <span class="kpi-value" id="kpi-progress">0 / 30</span>
+        <span class="kpi-desc" id="kpi-remaining">30 questions remaining</span>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="kpi-progress-bar"></div>
+        </div>
+      </div>
+      <div class="inset kpi-card">
+        <span class="kpi-label">Regulation 2 Focus</span>
+        <span class="kpi-value" id="kpi-reg2">0 / 4</span>
+        <span class="kpi-desc">Definition of work, DIY &amp; scope</span>
+      </div>
+      <div class="inset kpi-card">
+        <span class="kpi-label">Revision Status</span>
+        <span class="kpi-value" id="kpi-streak">0 streak</span>
+        <span class="kpi-desc" id="kpi-mastery">Answer questions to track readiness</span>
+      </div>
+    </section>
+
+    <!-- Asymmetric Dashboard Workspace -->
+    <div class="workspace-grid">
+      <!-- Left Main Column: Filter Controls & Active Quiz Engine -->
+      <main class="main-column" aria-label="Interactive quiz area">
+        <section class="controls-panel" aria-label="Quiz filters and view controls">
+          <div class="field-group">
+            <label for="filter-part" class="field-label">Filter by GSIUR Part</label>
+            <select id="filter-part" class="handbook-select" onchange="setPartFilter(this.value)">
+              <option value="all">All Regulations (Regs 2–32 · 30 questions)</option>
+              <option value="partA">Part A: Reg 2 Definitions &amp; DIY (4 questions)</option>
+              <option value="partB">Part B: Competence, Safety &amp; Controls (10 questions)</option>
+              <option value="partC">Part C: Meters &amp; Regulators (3 questions)</option>
+              <option value="partD">Part D: Installation Pipework (5 questions)</option>
+              <option value="partE">Part E: Gas Appliances &amp; Flues (8 questions)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="filter-status" class="field-label">Filter by answer status</label>
+            <select id="filter-status" class="handbook-select" onchange="setStatusFilter(this.value)">
+              <option value="all">All questions</option>
+              <option value="unanswered">Unanswered only</option>
+              <option value="incorrect">Incorrect only (Review)</option>
+              <option value="flagged">Flagged for review</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="view-mode" class="field-label">Display mode</label>
+            <select id="view-mode" class="handbook-select" onchange="setViewMode(this.value)">
+              <option value="single">Single-question focus</option>
+              <option value="list">All matching questions</option>
+            </select>
+          </div>
+        </section>
+
+        <div class="quiz-wrapper" id="quiz-container" aria-live="polite"></div>
+      </main>
+
+      <!-- Right Side Column: Part Breakdown, 30-Q Matrix, Actions & Reference -->
+      <aside class="side-column" aria-label="Revision tracking and reference">
+        <section class="side-section">
+          <h2>Question Index (01–30)</h2>
+          <p class="source-note">Select any question tile to jump straight to that regulation.</p>
+          <div class="matrix-grid" id="question-matrix"></div>
+          <div class="matrix-legend">
+            <span class="legend-item"><span class="legend-swatch legend-swatch--unanswered"></span> Unanswered</span>
+            <span class="legend-item"><span class="legend-swatch legend-swatch--correct"></span> Correct</span>
+            <span class="legend-item"><span class="legend-swatch legend-swatch--incorrect"></span> Incorrect</span>
+            <span class="legend-item"><strong>F</strong> = Flagged</span>
+          </div>
+        </section>
+
+        <section class="side-section">
+          <h2>Performance by GSIUR Part</h2>
+          <table class="handbook-table">
+            <thead>
+              <tr>
+                <th scope="col">Part &amp; Regs</th>
+                <th scope="col" class="num">Correct</th>
+                <th scope="col" class="num">Accuracy</th>
+              </tr>
+            </thead>
+            <tbody id="part-breakdown-body"></tbody>
+          </table>
+        </section>
+
+        <section class="side-section">
+          <h2>Revision Actions</h2>
+          <div class="action-stack">
+            <button type="button" class="button button--secondary" id="btn-review-missed" onclick="reviewMissedQuestions()">
+              Review incorrect (0)
+            </button>
+            <button type="button" class="button button--secondary" onclick="exportRevisionCsv()">
+              Export results (CSV)
+            </button>
+            <button type="button" class="button button--outline" id="btn-reset-quiz" onclick="handleResetClick(this)">
+              Reset all answers
+            </button>
+          </div>
+          <div class="inline-status-msg" id="action-feedback" role="status"></div>
+        </section>
+
+        <section class="side-section">
+          <h3>Key Statutory Thresholds</h3>
+          <dl class="summary-list">
+            <div class="summary-row">
+              <dt class="summary-key">Reg 2(1) Bayonet fitting</dt>
+              <dd class="summary-val">Excluded unless installing</dd>
+            </div>
+            <div class="summary-row">
+              <dt class="summary-key">Reg 15(2) Meter notice</dt>
+              <dd class="summary-val">&gt; 2 m or out of sight</dd>
+            </div>
+            <div class="summary-row">
+              <dt class="summary-key">Reg 24(1) Service pipe</dt>
+              <dd class="summary-val">≥ 50 mm ID (2+ floors)</dd>
+            </div>
+            <div class="summary-row">
+              <dt class="summary-key">Reg 24(2) Service pipework</dt>
+              <dd class="summary-val">≥ 30 mm ID (LPG)</dd>
+            </div>
+            <div class="summary-row">
+              <dt class="summary-key">Reg 24(1) Line diagram</dt>
+              <dd class="summary-val">Pipes ≥ 25 mm ID</dd>
+            </div>
+            <div class="summary-row">
+              <dt class="summary-key">Reg 26(9) Mandatory checks</dt>
+              <dd class="summary-val">4 checks after work</dd>
+            </div>
+          </dl>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    const PARTS = [
+      { id: `partA`, label: `Part A · Reg 2`, title: `Part A: Reg 2 Definitions & DIY`, regs: `Reg 2` },
+      { id: `partB`, label: `Part B · Regs 3–10`, title: `Part B: Competence, Safety & Controls`, regs: `Regs 3–10` },
+      { id: `partC`, label: `Part C · Regs 14–17`, title: `Part C: Meters & Regulators`, regs: `Regs 14–17` },
+      { id: `partD`, label: `Part D · Regs 18–24`, title: `Part D: Installation Pipework`, regs: `Regs 18–24` },
+      { id: `partE`, label: `Part E · Regs 26–32`, title: `Part E: Gas Appliances & Flues`, regs: `Regs 26–32` }
+    ];
+
+    const QUESTIONS = [
+      {
+        id: 1,
+        part: `partA`,
+        reg: `Regulation 2(1) & L56 Para 52`,
+        topic: `Definition of 'work' & DIY activities`,
+        stem: `Under Regulation 2(1) of GSIUR 1998 and its ACOP guidance, when a homeowner carries out a do-it-yourself (DIY) repair on a gas appliance or performs gas work as an unpaid favour for a relative, how is that activity classified?`,
+        options: [
+          `It is exempt from GSIUR because no payment, reward, or commercial contract is involved.`,
+          `It is legally classified as 'work' in relation to a gas fitting: the person must be competent under Regulation 3(1), though HSE-approved class membership under Regulation 3(3) is required only for businesses.`,
+          `It counts as 'work' only if the person cuts into fixed copper installation pipework rather than replacing appliance seals or controls.`,
+          `It is an absolute criminal offence for anyone without Gas Safe registration, even if they are competent.`
+        ],
+        correct: 1,
+        explanation: `Regulation 2(1) defines 'work' in relation to a gas fitting as including installing, re-connecting, maintaining, servicing, permanently adjusting, disconnecting, repairing, altering, renewing, purging, changing position (where not readily movable), or removing the fitting—whether carried out by an employee or not. L56 Guidance paragraph 52 explicitly confirms that 'work' covers DIY activities, favours for friends and relatives, and unpaid voluntary work for charities. Any person doing such work must have the necessary competence under Regulation 3(1), whereas membership of an HSE-approved class of persons under Regulation 3(3) applies only to businesses carrying out gas-fitting work.`
+      },
+      {
+        id: 2,
+        part: `partA`,
+        reg: `Regulation 2(1) & L56 Paras 55–57`,
+        topic: `Bayonet fittings & moving appliances`,
+        stem: `Which of the following activities involving a free-standing domestic gas cooker fitted with a flexible hose and bayonet connector is excluded from the legal definition of 'work' under Regulation 2(1)?`,
+        options: [
+          `Installing a newly purchased gas cooker by plugging its bayonet hose into an existing wall socket for the first time.`,
+          `Disconnecting and reconnecting the bayonet fitting solely to move the cooker temporarily so the floor space behind it can be cleaned.`,
+          `Replacing a worn flexible cooker hose and bayonet plug with a brand-new hose assembly.`,
+          `Uncoupling the wall-mounted bayonet socket itself from the fixed installation pipework.`
+        ],
+        correct: 1,
+        explanation: `The definition of 'work' in Regulation 2(1) specifically states that the expression "does not include the connection or disconnection of a bayonet fitting or other self-sealing connector." L56 Guidance paragraph 57 explains that although a free-standing cooker on a flexible hose is not "readily movable", moving it temporarily to clean the space it occupies—including disconnecting and reconnecting its bayonet fitting—is not regarded as 'work'. However, L56 Guidance paragraphs 55–56 clarify that installing an appliance (even via a bayonet fitting) and physically breaking into a gasway both constitute 'work'.`
+      },
+      {
+        id: 3,
+        part: `partA`,
+        reg: `Regulation 2(1) & L56 Paras 38–41`,
+        topic: `'Gas fittings' vs statutory exclusions`,
+        stem: `Under Regulation 2(1) of GSIUR 1998, which group of components falls within the legal definition of 'gas fittings'?`,
+        options: [
+          `Distribution mains and service pipes upstream of the consumer's emergency control valve.`,
+          `Refillable LPG storage vessels, their vapour valves, and disposable gas cartridges.`,
+          `Installation pipework, appliance connectors, inlet shut-off devices, regulators, meters, and consumer appliances used for heating, lighting, or cooking.`,
+          `Gas-fired industrial process furnaces and bitumen boilers operated on industrial premises or construction sites.`
+        ],
+        correct: 2,
+        explanation: `Regulation 2(1) defines 'gas fittings' as gas pipework, valves (other than emergency controls), regulators, meters, and fittings, apparatus, and appliances designed for consumer use (heating, lighting, cooking, or other purposes). It expressly excludes (a) any part of a service pipe, (b) any distribution main upstream of the service pipe, (c) a gas storage vessel, and (d) a disposable gas cylinder or cartridge. L56 Guidance paragraph 38 notes that industrial process plant on industrial premises—including bitumen boilers and welding torches—is also excluded from 'gas fittings'.`
+      },
+      {
+        id: 4,
+        part: `partA`,
+        reg: `Regulation 2(4)–(8) & L56 Paras 63–74`,
+        topic: `Scope & Regulation 2(6) control device exemption`,
+        stem: `Under Regulation 2(6)(c) of GSIUR 1998, when is work on a control device attached to a gas appliance excluded from the Regulations?`,
+        options: [
+          `Whenever the appliance is installed inside an office or shop rather than a private domestic dwelling.`,
+          `When the device is intended primarily for use by a consumer of gas (such as an electric thermostat or timer switch) AND the work does not involve breaking into a gasway.`,
+          `Whenever the work involves only replacing the gas burner injector or internal combustion seal.`,
+          `Never; any replacement of an electrical timer or thermostat on a boiler must be performed by a Gas Safe registered engineer under GSIUR.`
+        ],
+        correct: 1,
+        explanation: `Regulation 2(6)(c) excludes work in relation to a control device on a gas appliance if (i) the device is intended primarily for use by a consumer of gas, and (ii) the work does not involve breaking into a gasway. L56 Guidance paragraph 74 cites removing or replacing electric thermostats and on/off timer switches as examples where there is no risk of a gas escape. Consequently, Gas Safe registration under Regulation 3 is not required under GSIUR for such tasks, though competence to work safely is still required under the Health and Safety at Work etc. Act 1974.`
+      },
+      {
+        id: 5,
+        part: `partB`,
+        reg: `Regulation 3(1)–(3) & L56 Paras 83–84`,
+        topic: `Competence vs approved-class registration`,
+        stem: `How do the duties in Regulation 3(1), Regulation 3(2), and Regulation 3(3) operate together for gas engineers and their employers?`,
+        options: [
+          `Regulation 3(3) registration replaces the need for individual competence under Regulation 3(1).`,
+          `Every person carrying out gas work must be competent (Reg 3(1)), employers must ensure employees are competent and monitored (Reg 3(2)), and employers/self-employed persons must belong to an HSE-approved class of persons (Reg 3(3)).`,
+          `Only self-employed sole traders require competence under Regulation 3(1); employees of large companies are exempt.`,
+          `Membership of an HSE-approved class of persons is voluntary guidance and not a statutory requirement under Regulation 3(3).`
+        ],
+        correct: 1,
+        explanation: `Regulation 3 establishes a three-part framework: Regulation 3(1) requires any person carrying out work on a gas fitting or gas storage vessel to be competent; Regulation 3(2) requires employers to ensure their employees have the necessary competence, experience, and training (with ongoing monitoring under L56 Para 84); and Regulation 3(3) prohibits any employer or self-employed person from carrying out work on a gas fitting unless they (or their employer) belong to an HSE-approved class of persons (Gas Safe Register).`
+      },
+      {
+        id: 6,
+        part: `partB`,
+        reg: `Regulation 3(4) & L56 Paras 94–96`,
+        topic: `Exceptions to HSE-approved class membership`,
+        stem: `Under Regulation 3(4), which activities do NOT require membership of an HSE-approved class of persons (such as Gas Safe Register), provided the person carrying out the work is competent?`,
+        options: [
+          `Replacing a hose or regulator on a portable or mobile space heater, or replacing a hose connecting a refillable cylinder to installation pipework.`,
+          `Installing a new LPG bulk storage tank and connecting its underground service pipework into a dwelling.`,
+          `Exchanging a natural gas primary meter and reconnecting its outlet union.`,
+          `Removing and refitting a gas hob connected by rigid copper pipework during kitchen refurbishment.`
+        ],
+        correct: 0,
+        explanation: `Regulation 3(4)(a)–(b) exempts two limited 'like-for-like' tasks from the approved-class requirement of Regulation 3(3): (a) replacing a hose or regulator on a portable or mobile space heater (such as an LPG cabinet heater), and (b) replacing a hose connecting a refillable cylinder to installation pipework. L56 Guidance paragraphs 95–96 emphasise that anyone undertaking these tasks must still be competent under Regulation 3(1) and follow supplier/manufacturer instructions, while any work on service pipework or other gas fittings requires an approved-class engineer.`
+      },
+      {
+        id: 7,
+        part: `partB`,
+        reg: `Regulation 3(8) & L56 Paras 97–99`,
+        topic: `Caravan, holiday home & boat manufacturers`,
+        stem: `Regulation 3(8) places a specific statutory obligation on manufacturers of caravans, holiday homes, and inland waterway boats. What must those manufacturers ensure?`,
+        options: [
+          `Only that a warning sticker is placed inside the wardrobe before the unit leaves the factory gate.`,
+          `That employees installing or repairing gas fittings are competent and that, so far as is reasonably practicable, the installed fittings and flues will not contravene GSIUR when connected to a gas supply—unless first use is reasonably believed to be excluded.`,
+          `That no gas appliances of any kind are pre-installed during factory production.`,
+          `That the end purchaser personally registers the caravan with the HSE before connecting an LPG cylinder.`
+        ],
+        correct: 1,
+        explanation: `Although factories are generally excluded from GSIUR under Regulation 2(4), Regulation 3(8) specifically applies Regulation 3(1), (2), and (6) to manufacturers of vehicles, vessels, or caravans intended to be used in circumstances covered by GSIUR (such as hired motor caravans, holiday homes, and inland waterway boats). Manufacturers must ensure employees are competent and take reasonable steps to establish intended use and ensure gas fittings, flues, and ventilation comply when first connected to a gas supply.`
+      },
+      {
+        id: 8,
+        part: `partB`,
+        reg: `Regulation 4`,
+        topic: `Duty on employer commissioning gas work`,
+        stem: `A school bursar arranges for an external contractor to service the commercial gas catering range in the school kitchen. What duty does Regulation 4 place on the employer or person in control of the workplace?`,
+        options: [
+          `To verify the contractor's public liability insurance policy and retain a copy for 12 months.`,
+          `To take reasonable steps to ensure that the person undertaking the gas-fitting work is, or is employed by, a member of an HSE-approved class of persons under Regulation 3(3).`,
+          `To supervise the servicing engineer continuously throughout the entire procedure.`,
+          `No duty applies because Regulation 4 only governs domestic landlords.`
+        ],
+        correct: 1,
+        explanation: `Regulation 4 ("Duty on employer") states that where an employer or self-employed person requires work on a gas fitting at a workplace under their control—or has control to any extent over such work—they must take reasonable steps to ensure the person undertaking that work is, or is employed by, a member of an HSE-approved class of persons under Regulation 3(3) (checking Gas Safe Register credentials and competence categories).`
+      },
+      {
+        id: 9,
+        part: `partB`,
+        reg: `Regulation 5(1)–(3) & L56 Paras 103–111`,
+        topic: `Materials, standards & preventing danger`,
+        stem: `Which two overarching duties does Regulation 5(3) impose on any person carrying out work on a gas fitting or gas storage vessel?`,
+        options: [
+          `To use only British-manufactured brass fittings AND notify the local fire authority.`,
+          `To carry out the work in accordance with appropriate standards AND in such a way as to prevent danger to any person.`,
+          `To complete all pipework joints by silver soldering AND insulate every pipe with mineral wool.`,
+          `To work only during daylight hours AND isolate the electricity supply at the consumer unit.`
+        ],
+        correct: 1,
+        explanation: `Regulation 5(3) requires that no person shall carry out any work in relation to a gas fitting or gas storage vessel otherwise than (1) in accordance with appropriate standards, and (2) in such a way as to prevent danger to any person. L56 Guidance paragraph 111 confirms these are two distinct yet linked obligations. Regulation 5(1) further requires every part of an installed fitting to be of good construction, sound material, adequate strength and size, and appropriate for the gas used.`
+      },
+      {
+        id: 10,
+        part: `partB`,
+        reg: `Regulation 6(1)–(2) & L56 Paras 115–116`,
+        topic: `Sealing incomplete gasways before leaving`,
+        stem: `While altering an existing installation, an engineer breaks into a live gasway and must leave the property unattended for several hours before fitting the new appliance. Under Regulation 6(2), what is required?`,
+        options: [
+          `Closing the emergency control valve at the primary meter is sufficient on its own.`,
+          `Every incomplete gasway must be sealed with an appropriate fitting (such as a proprietary cap or plug) or the fitting must otherwise be made safe so gas cannot be readily restored.`,
+          `Closing the appliance's integral isolation valve without capping the open pipe end is compliant.`,
+          `Leaving a prominent handwritten warning notice taped to the gas meter satisfies Regulation 6(2).`
+        ],
+        correct: 1,
+        explanation: `Regulation 6(2) prohibits leaving a gas fitting unattended unless every incomplete gasway has been sealed with the "appropriate fitting" or the gas fitting is otherwise safe. L56 Guidance paragraph 115 explicitly warns that closing an emergency control valve does NOT meet this requirement, because someone could deliberately or inadvertently restore the supply; the open gasway must be physically sealed with an appropriate fitting.`
+      },
+      {
+        id: 11,
+        part: `partB`,
+        reg: `Regulation 7`,
+        topic: `Protection against damage`,
+        stem: `Under Regulation 7 of GSIUR 1998, what must an installer ensure regarding the physical protection of gas fittings?`,
+        options: [
+          `Gas fittings must be protected against damage—including corrosion, mechanical impact, excessive heat, or structural stress—and must not be installed in positions where damage is likely.`,
+          `All copper gas pipework must be wrapped in PVC tape regardless of whether it is exposed in a dry living room.`,
+          `Gas meters must always be installed externally in recessed wall boxes even in listed historic buildings.`,
+          `Only underground service pipes require protection against mechanical damage; internal pipework is exempt.`
+        ],
+        correct: 0,
+        explanation: `Regulation 7 ("Protection against damage") requires that any person installing a gas fitting must ensure it is adequately protected against damage—such as impact from vehicles or equipment, corrosion from dampness or aggressive building materials, or adverse heat—and must not locate a fitting where it is exposed to conditions likely to cause damage.`
+      },
+      {
+        id: 12,
+        part: `partB`,
+        reg: `Regulation 8(1)–(2) & L56 Paras 147–148`,
+        topic: `Alterations to premises & existing fittings`,
+        stem: `During a home extension, a builder builds a conservatory over an external boiler flue terminal and bricks over a purpose-provided room air vent. How does Regulation 8 apply?`,
+        options: [
+          `Regulation 8 applies only to Gas Safe registered engineers, so the builder has no legal duty under GSIUR.`,
+          `Regulation 8(1) and 8(2) apply to EVERYONE, prohibiting any alteration to premises or any action affecting a gas fitting, flue, or ventilation that compromises gas safety.`,
+          `Regulation 8 applies only if the boiler is owned by a landlord rather than an owner-occupier.`,
+          `It is permitted provided the builder informs the homeowner verbally that the conservatory windows should stay open.`
+        ],
+        correct: 1,
+        explanation: `Regulation 8(1) prohibits anyone from altering premises where a gas fitting or gas storage vessel is fitted in a way that would adversely affect its safety (such that it would contravene GSIUR if installed afterwards). Regulation 8(2) prohibits anyone from doing anything else affecting a gas fitting, flue, or means of ventilation that might cause danger upon subsequent use. L56 Guidance paragraph 147 stresses that Regulation 8 applies to everyone—not just gas engineers—and expressly highlights blocking air vents or enclosing flues.`
+      },
+      {
+        id: 13,
+        part: `partB`,
+        reg: `Regulation 9(1)–(4) & L56 Paras 150–158`,
+        topic: `Emergency control siting & notices`,
+        stem: `Under Regulation 9(1) and 9(3), what must be in place whenever gas is first enabled for use in any premises?`,
+        options: [
+          `An automatic thermal cut-off valve on every radiator in the building.`,
+          `An appropriately sited emergency control with adequate access—and where that control is not adjacent to a primary meter, a permanently worded gas-escape procedure notice posted adjacent to the control.`,
+          `A duplicate emergency control valve locked inside a key-safe accessible only to the gas transporter.`,
+          `An acoustic gas-leak siren wired into the building's mains lighting circuit.`
+        ],
+        correct: 1,
+        explanation: `Regulation 9(1) prohibits enabling gas to be supplied for the first time unless an appropriately sited emergency control with adequate access is provided. Where the emergency control is adjacent to a primary meter, the emergency notice is displayed at the meter under Regulation 15 (L56 Para 157). Where the emergency control is NOT adjacent to a primary meter, Regulation 9(3) requires a suitably worded permanent notice describing the action to take in a gas escape to be posted adjacent to the control.`
+      },
+      {
+        id: 14,
+        part: `partB`,
+        reg: `Regulation 10`,
+        topic: `Maintaining electrical continuity`,
+        stem: `When disconnecting a gas meter or breaking into metallic installation pipework where an electric current could pass across the joint, what precaution does Regulation 10 mandate?`,
+        options: [
+          `Attaching an approved temporary electrical continuity bond across the section before disconnecting or breaking the pipework or meter.`,
+          `Wrapping the exposed pipe threads in PTFE tape to insulate the joint permanently.`,
+          `Connecting the gas pipe directly to the nearest cold water rising main with bare copper wire.`,
+          `Waiting 30 minutes after shutting the emergency control valve before loosening any union.`
+        ],
+        correct: 0,
+        explanation: `Regulation 10 ("Maintaining electrical continuity") requires that before any person disconnects a meter or breaks into metallic installation pipework (where electrical continuity or stray earth currents could create shock or spark hazards), they must maintain electrical continuity—in practice by clamping a temporary continuity bond across the break before uncoupling the fitting or meter.`
+      },
+      {
+        id: 15,
+        part: `partC`,
+        reg: `Regulation 14(1)–(3)`,
+        topic: `Regulators on refillable cylinder supplies`,
+        stem: `Under Regulation 14(3) of GSIUR 1998, what is legally required whenever gas is supplied through an installation consisting of one or more refillable cylinders?`,
+        options: [
+          `Each cylinder must be chained to a structural brick pier at least 3 metres from any boundary fence.`,
+          `The supply of gas must pass through a regulator that controls the nominal operating pressure of the gas.`,
+          `A secondary meter must be fitted downstream of every cylinder changeover valve.`,
+          `The cylinder must operate at full vapour pressure directly into the appliance burner valve.`
+        ],
+        correct: 1,
+        explanation: `Regulation 14(3) states explicitly: "No person shall cause gas to be supplied through an installation consisting of one or more re-fillable cylinders unless the supply of gas passes through a regulator which controls the nominal operating pressure of the gas." Regulation 14(1)–(2) and L56 Guidance also require regulators and over-/under-pressure protection devices to be designed, constructed, and installed to appropriate standards.`
+      },
+      {
+        id: 16,
+        part: `partC`,
+        reg: `Regulation 15(1)–(2) & L56 Para 182`,
+        topic: `Primary meter notices & the 2-metre rule`,
+        stem: `Under Regulation 15(2), when must a permanent notice indicating the position of the nearest upstream emergency control be prominently displayed on or near a primary gas meter?`,
+        options: [
+          `Whenever the meter is installed or relocated more than 2 metres from, or out of sight of, the nearest upstream emergency control in the premises.`,
+          `Only when the primary meter serves a commercial kitchen with an input rating above 60 kW.`,
+          `Only when the gas meter is located outdoors in a semi-concealed ground box.`,
+          `Whenever the primary meter is more than 10 metres from the nearest gas appliance.`
+        ],
+        correct: 0,
+        explanation: `Regulation 15(1) requires every primary meter to have a permanent notice on or near it detailing the procedure in the event of a gas escape (updated if the emergency service provider changes under L56 Para 182). Regulation 15(2) adds that if a meter is installed or relocated more than 2 metres from—or out of sight of—the nearest upstream emergency control, a second permanent notice indicating the exact position of that emergency control must also be prominently displayed on or near the meter.`
+      },
+      {
+        id: 17,
+        part: `partC`,
+        reg: `Regulation 17 & L56 Para 195`,
+        topic: `Secondary meters in multi-occupancy buildings`,
+        stem: `What is the primary safety purpose of Regulation 17 regarding buildings where a primary meter feeds secondary meters (such as blocks of flats or houses in multiple occupation)?`,
+        options: [
+          `To allow any flat occupier to turn off the main primary meter for the entire building at will.`,
+          `To ensure information on the location and configuration of emergency control valves and pipework is available so individual dwellings can be isolated safely and downstream effects checked.`,
+          `To permit secondary meters to be installed without individual isolation valves.`,
+          `To transfer all annual landlord gas safety check duties onto the gas transporter.`
+        ],
+        correct: 1,
+        explanation: `L56 Guidance paragraph 195 explains that Regulation 17 applies where gas is supplied through a primary meter to secondary meters serving multiple downstream consumers (such as flats or multi-occupancy houses). Clear information on the configuration and location of emergency control valves and pipework enables engineers or emergency services to isolate an individual dwelling and check affected supplies safely after disconnection or reconnection.`
+      },
+      {
+        id: 18,
+        part: `partD`,
+        reg: `Regulation 18`,
+        topic: `Safe use & positioning of pipes`,
+        stem: `What fundamental restriction does Regulation 18 impose on the routing and positioning of installation pipework?`,
+        options: [
+          `Installation pipework must never be installed in any position in which it cannot be used with safety.`,
+          `All domestic installation pipework must be run visibly on surface clips and may never pass beneath floorboards.`,
+          `Only stainless steel pipework may be installed inside commercial office buildings.`,
+          `Installation pipework must always be routed at least 1 metre above floor level.`
+        ],
+        correct: 0,
+        explanation: `Regulation 18 ("Safe use of pipes") prohibits installing any installation pipework in a position in which it cannot be used with safety. This requires avoiding hazardous routing—such as unventilated shafts, lift wells, excessively hot zones, or unsafe proximity to electrical switchgear and drainage runs.`
+      },
+      {
+        id: 19,
+        part: `partD`,
+        reg: `Regulation 19`,
+        topic: `Enclosed pipes & wall/floor penetrations`,
+        stem: `Under Regulation 19 of GSIUR 1998, what precautions apply when installation pipework passes through a wall or floor, or runs through an enclosed space or duct?`,
+        options: [
+          `Pipes passing through walls or solid floors must be suitably sleeved/protected against damage and corrosion, and enclosed ducts or voids must be adequately ventilated or otherwise protected against gas build-up.`,
+          `Enclosed pipes may run freely inside unventilated building cavities without sleeves provided the pipe is painted.`,
+          `Pipes passing through walls must be cemented solidly into the brickwork with no sleeve so air cannot pass.`,
+          `Regulation 19 applies only to steel pipework above 50 mm diameter.`
+        ],
+        correct: 0,
+        explanation: `Regulation 19 ("Enclosed pipes") prohibits enclosing installation pipework in unventilated voids or cavities where a leak could accumulate dangerously, and requires pipes passing through walls, floors, or structures to be enclosed in a suitable protective sleeve (sealed against the ingress of gas/moisture as appropriate) and protected from corrosion and structural movement.`
+      },
+      {
+        id: 20,
+        part: `partD`,
+        reg: `Regulation 22(1) & L56 Para 244`,
+        topic: `Testing and purging installation pipework`,
+        stem: `After extending or repairing installation pipework remote from any gas appliance, why must the engineer still carry out tests even though Regulation 26(9) applies only to gas appliances?`,
+        options: [
+          `Because Regulation 22 (alongside Regulations 6(6) and 12(6)) independently requires tightness testing and safe purging of air or gas after work on installation pipework and meters.`,
+          `Only because the homeowner's building insurer requires a pressure test certificate.`,
+          `Testing is only required if the pipework was altered by more than 5 metres in length.`,
+          `Purging is unnecessary after repairs because natural gas is lighter than air and vents itself through burners.`
+        ],
+        correct: 0,
+        explanation: `L56 Guidance paragraph 244 highlights that while Regulation 26(9) covers post-work checks on gas appliances, appropriate checks and tests are still legally required after any work on meters or installation pipework under Regulations 6(6), 12(6), and 22(1). Regulation 22 mandates testing pipework for gastightness and safely purging it of air or gas.`
+      },
+      {
+        id: 21,
+        part: `partD`,
+        reg: `Regulation 23`,
+        topic: `Marking and identification of pipework`,
+        stem: `Under Regulation 23 of GSIUR 1998, what is the purpose of marking installation pipework in premises?`,
+        options: [
+          `To indicate the manufacturer's trade name and installation date on every elbow fitting.`,
+          `To ensure installation pipework is clearly identified as conveying gas wherever it could otherwise be confused with pipes carrying water, steam, compressed air, or other substances.`,
+          `To allow gas suppliers to estimate annual gas consumption visually from pipe colour.`,
+          `Regulation 23 requires domestic central heating flow and return pipes to be painted yellow.`
+        ],
+        correct: 1,
+        explanation: `Regulation 23 ("Marking of pipes") requires installation pipework to be suitably marked (typically yellow ochre identification bands or labelling to British Standards) where it runs alongside other building services in premises so that anyone working on the building can immediately distinguish gas pipes from water, heating, oil, or compressed-air lines.`
+      },
+      {
+        id: 22,
+        part: `partD`,
+        reg: `Regulation 24(1)–(3)`,
+        topic: `Multi-floor buildings: valves & line diagrams`,
+        stem: `In a building with two or more gas-supplied floors (or a floor with separately supplied areas), what pipe thresholds under Regulation 24(1)–(2) trigger the requirement for a conspicuous isolation valve and a permanent line diagram?`,
+        options: [
+          `A service pipe of internal diameter 50 mm or more (or service pipework of 30 mm or more), with the diagram showing all installation pipework of 25 mm internal diameter or more, meters, emergency controls, valves, and pressure test points.`,
+          `A service pipe of internal diameter 22 mm or more (or service pipework of 15 mm or more), with the diagram showing all pipes down to 8 mm.`,
+          `A service pipe of internal diameter 100 mm or more, with the diagram showing only the primary gas meter.`,
+          `Any building with two or more gas appliances, regardless of pipe diameter or number of floors.`
+        ],
+        correct: 0,
+        explanation: `Regulation 24(1)–(2) specifies exact thresholds: where a building has two or more floors supplied with gas (or a floor with areas having separate supplies) and the service pipe has an internal diameter of 50 mm or more—or LPG service pipework has an internal diameter of 30 mm or more—no person may install incoming installation pipework unless (a) a conspicuous and readily accessible valve is fitted, and (b) a permanent line diagram is attached near the primary meter, emergency control, or storage vessel showing all installation pipework ≥ 25 mm ID, meters, emergency controls, valves, and pressure test points.`
+      },
+      {
+        id: 23,
+        part: `partE`,
+        reg: `Regulation 26(1)–(2) & L56 Para 232`,
+        topic: `Rigid pipe requirement for flued appliances`,
+        stem: `Under Regulation 26(2), how must a flued domestic gas appliance be connected to the gas supply system, and why?`,
+        options: [
+          `By a flexible braided hose with a quick-release bayonet fitting to simplify annual servicing.`,
+          `Only by a permanently fixed rigid pipe, preventing consumers from moving the appliance away from its flue.`,
+          `By either flexible hose or rigid copper pipe, provided the appliance is secured to the floor with screws.`,
+          `By a flexible corrugated stainless hose whenever the appliance is an open-flued decorative fire.`
+        ],
+        correct: 1,
+        explanation: `Regulation 26(2) states: "No person shall connect a flued domestic gas appliance to the gas supply system except by a permanently fixed rigid pipe." L56 Guidance paragraph 232 explains that flexible connections are prohibited on flued domestic appliances because they would allow a consumer to pull or shift the appliance out of alignment with its flue, creating a severe risk of combustion products spilling into the room.`
+      },
+      {
+        id: 24,
+        part: `partE`,
+        reg: `Regulation 26(3) & L56 Paras 233–234`,
+        topic: `Used and relocated gas appliances`,
+        stem: `A homeowner asks a Gas Safe registered engineer to disconnect their existing gas fire and reinstall it against the opposite wall in the same living room. Does Regulation 26(3) apply?`,
+        options: [
+          `No, because the appliance has not changed ownership and remains in the same room.`,
+          `Yes—Regulation 26(3) requires verifying that any used appliance is in a safe condition for further use before installation, which applies both to second-hand appliances and to appliances moved from one location to another even within the same room.`,
+          `Only if the appliance was originally manufactured before 31 October 1998.`,
+          `No, provided the engineer carries out a tightness test on the wall isolation valve afterwards.`
+        ],
+        correct: 1,
+        explanation: `Regulation 26(3) prohibits installing a used gas appliance without verifying that it is in a safe condition for further use. L56 Guidance paragraphs 233–234 emphasise that physical condition must be checked prior to installation (as full inspection may be impossible afterwards), and explicitly confirm this applies not only to second-hand appliances but also whenever a used appliance is moved from one location to another—even within the same room.`
+      },
+      {
+        id: 25,
+        part: `partE`,
+        reg: `Regulation 26(5)–(8) & L56 Para 236`,
+        topic: `Sealing uncommissioned appliances & conformity marks`,
+        stem: `Under Regulation 26(5) and 26(7)–(8), what must an installer do if a newly fitted gas appliance cannot yet be commissioned safely, and what rule governs conformity marks?`,
+        options: [
+          `Leave the appliance connected with its gas tap turned off, and remove the type-approval badge if the boiler is modified.`,
+          `Seal the appliance off from the gas supply with an appropriate fitting (capping the pipework), and never alter the appliance so it ceases to comply with approved safety standards or remove/deface conformity markings.`,
+          `Leave the gas supply live to the appliance inlet so the homeowner can light the pilot later.`,
+          `Cover the conformity badge with paint to protect it from condensation.`
+        ],
+        correct: 1,
+        explanation: `Regulation 26(5) prohibits leaving an installed gas appliance connected to the gas supply unless (a) it can be used safely, or (b) it is sealed off from the gas supply with an appropriate fitting (L56 Para 236: capping off the installation pipework serving the appliance). Additionally, Regulation 26(7)–(8) prohibits working on a type-approved appliance in a way that stops it complying with safety standards, or removing/defacing its conformity markings.`
+      },
+      {
+        id: 26,
+        part: `partE`,
+        reg: `Regulation 26(9)–(10) & L56 Paras 239–244`,
+        topic: `Mandatory post-work appliance checks & exemptions`,
+        stem: `Immediately after performing work on an installed gas appliance, which four matters must be examined under Regulation 26(9), and what two activities are exempt under Regulation 26(10)?`,
+        options: [
+          `Flue effectiveness, combustion air supply, operating pressure or heat input (or combustion), and safe functioning—exempt only for direct disconnection of the appliance or safe purging that does not adversely affect safety.`,
+          `Gas meter serial number, radiator balancing, room thermostat battery, and flue terminal height—exempt for all emergency callouts.`,
+          `Only gas tightness at the boiler isolation valve—exempt whenever the boiler has a room-sealed case.`,
+          `Flue effectiveness and water pressure only—exempt when replacing a burner or gas valve.`
+        ],
+        correct: 0,
+        explanation: `Regulation 26(9)(a)–(d) mandates immediate examination of: (a) the effectiveness of any flue, (b) the supply of combustion air, (c) the appliance's operating pressure or heat input (or combustion performance as specified), and (d) its operation to ensure safe functioning. Regulation 26(10) exempts these four checks solely for (a) the direct disconnection of the gas supply of a gas appliance, or (b) purging gas or air where that purging does not adversely affect the safety of the appliance, pipe, or fitting.`
+      },
+      {
+        id: 27,
+        part: `partE`,
+        reg: `Regulation 27 & Regulation 28 & L56 Para 261`,
+        topic: `Flue discharge & ready accessibility for maintenance`,
+        stem: `How do Regulations 27 and 28 govern the installation of a gas boiler inside a fitted kitchen cupboard?`,
+        options: [
+          `The boiler may be sealed inside a non-openable cupboard if a miniature inspection mirror is supplied.`,
+          `Its flue must safely convey all combustion products to the external air (Reg 27), and the appliance must be installed so it is readily accessible for operation, inspection, and maintenance (Reg 28), respecting manufacturer clearances.`,
+          `Cupboard clearances are purely cosmetic recommendations and have no legal standing under GSIUR.`,
+          `Regulation 28 applies only to floor-standing boilers over 30 kW, not wall-hung domestic boilers.`
+        ],
+        correct: 1,
+        explanation: `Regulation 27 requires every flue serving a gas appliance to be suitable, properly constructed, safely installed, and capable of discharging combustion products safely to the outside air. Regulation 28(1) prohibits installing any gas appliance except in such a manner that it is readily accessible for operation, inspection, and maintenance—with L56 Guidance paragraph 261 noting that required minimum clearance distances are specified in the manufacturer's installation instructions.`
+      },
+      {
+        id: 28,
+        part: `partE`,
+        reg: `Regulation 29`,
+        topic: `Manufacturer's instructions`,
+        stem: `What specific legal duty does Regulation 29 place on the person who installs a gas appliance?`,
+        options: [
+          `To leave the manufacturer's instructions for the appliance for use by the owner or occupier of the premises where it is installed.`,
+          `To post the manufacturer's instructions to the Gas Safe Register archive within 14 days of commissioning.`,
+          `To retain the manual in the engineer's van so the homeowner cannot alter boiler settings.`,
+          `To provide instructions only when installing commercial catering equipment, not domestic appliances.`
+        ],
+        correct: 0,
+        explanation: `Regulation 29 ("Manufacturer's instructions") explicitly requires the installer of a gas appliance to leave the manufacturer's instructions for the appliance for use by the owner or occupier of the premises. This provides essential operating, safety, clearance, and servicing guidance for users and future engineers.`
+      },
+      {
+        id: 29,
+        part: `partE`,
+        reg: `Regulation 30(1)–(4) & L56 Para 266`,
+        topic: `Room-sealed appliances & instantaneous water heaters`,
+        stem: `Under Regulation 30, what restriction applies to installing an instantaneous gas water heater, and to installing gas appliances in bathrooms or sleeping accommodation?`,
+        options: [
+          `All gas appliances are banned from bathrooms and bedrooms, even if they are room-sealed.`,
+          `No instantaneous gas water heater may be installed unless it is room-sealed or fitted with an atmosphere-sensing shutdown device; and specified appliances are prohibited in bathrooms, shower rooms, and sleeping accommodation unless room-sealed (or protected by such a device where permitted).`,
+          `Open-flued instantaneous water heaters are permitted in any bathroom provided a trickle vent is fitted to the door.`,
+          `Regulation 30 applies only to LPG caravans and does not affect bricks-and-mortar houses.`
+        ],
+        correct: 1,
+        explanation: `Regulation 30 restricts installing non-room-sealed appliances in high-risk spaces such as bathrooms, shower rooms, and rooms used for sleeping accommodation (extended to landlords' converted sleeping rooms under Regulation 36(11)). In addition, Regulation 30 places a general prohibition on installing any instantaneous gas water heater anywhere unless it is room-sealed or fitted with a device that shuts down the appliance before a dangerous quantity of combustion products can build up.`
+      },
+      {
+        id: 30,
+        part: `partE`,
+        reg: `Regulation 31 & Regulation 32`,
+        topic: `Suspended appliances & flue dampers`,
+        stem: `Which statement accurately states the legal rules in Regulation 31 (suspended appliances) and Regulation 32 (flue dampers)?`,
+        options: [
+          `Any gas unit heater may hang directly from flexible steel hose, and manual flue dampers are encouraged on domestic boilers to retain heat.`,
+          `A suspended appliance may only be installed if its installation pipework can safely support the weight and the appliance is designed to be so supported (Reg 31); and manually operated flue dampers are prohibited on domestic appliances while automatic dampers must prevent gas flow unless open (Reg 32).`,
+          `Suspended appliances are banned under Regulation 31, while manual flue dampers are permitted under Regulation 32 if chained open.`,
+          `Regulations 31 and 32 apply exclusively to coal-mine methane venting plant.`
+        ],
+        correct: 1,
+        explanation: `Regulation 31 prohibits installing a suspended gas appliance unless the installation pipework to which it is connected is constructed and installed to safely support the weight imposed AND the appliance is designed to be supported in that way. Regulation 32 prohibits fitting manually operated flue dampers on domestic gas appliances and requires any automatic flue damper to be interlocked so gas cannot be supplied to the main burner unless the damper is open.`
+      }
+    ];
+
+    const appState = {
+      answers: {},
+      flagged: [],
+      activePart: `all`,
+      statusFilter: `all`,
+      viewMode: `single`,
+      currentQuestionId: 1
+    };
+
+    function getFilteredQuestions() {
+      return QUESTIONS.filter(function (q) {
+        if (appState.activePart !== `all` && q.part !== appState.activePart) {
+          return false;
+        }
+        const userChoice = appState.answers[q.id];
+        const isAnswered = typeof userChoice === `number`;
+        const isCorrect = isAnswered && userChoice === q.correct;
+        const isFlagged = appState.flagged.indexOf(q.id) !== -1;
+
+        if (appState.statusFilter === `unanswered`) return !isAnswered;
+        if (appState.statusFilter === `incorrect`) return isAnswered && !isCorrect;
+        if (appState.statusFilter === `flagged`) return isFlagged;
+        return true;
+      });
+    }
+
+    function computeStats() {
+      let answeredCount = 0;
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let reg2Correct = 0;
+      let reg2Answered = 0;
+      let streak = 0;
+      let countingStreak = true;
+
+      for (let i = QUESTIONS.length - 1; i >= 0; i--) {
+        const q = QUESTIONS[i];
+        const ans = appState.answers[q.id];
+        if (typeof ans === `number`) {
+          if (countingStreak) {
+            if (ans === q.correct) {
+              streak++;
+            } else {
+              countingStreak = false;
+            }
+          }
+        }
+      }
+
+      for (let i = 0; i < QUESTIONS.length; i++) {
+        const q = QUESTIONS[i];
+        const ans = appState.answers[q.id];
+        if (typeof ans === `number`) {
+          answeredCount++;
+          if (ans === q.correct) {
+            correctCount++;
+            if (q.part === `partA`) reg2Correct++;
+          } else {
+            incorrectCount++;
+          }
+          if (q.part === `partA`) reg2Answered++;
+        }
+      }
+
+      const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+      return {
+        answeredCount: answeredCount,
+        correctCount: correctCount,
+        incorrectCount: incorrectCount,
+        reg2Correct: reg2Correct,
+        reg2Answered: reg2Answered,
+        accuracy: accuracy,
+        streak: streak
+      };
+    }
+
+    async function persistState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+        try {
+          await window.notebookAppApi.setAppState({
+            answers: appState.answers,
+            flagged: appState.flagged,
+            activePart: appState.activePart,
+            statusFilter: appState.statusFilter,
+            viewMode: appState.viewMode,
+            currentQuestionId: appState.currentQuestionId
+          });
+        } catch (err) {
+          /* State save error ignored silently in preview */
+        }
+      }
+    }
+
+    function syncControlValues() {
+      const partSel = document.getElementById(`filter-part`);
+      const statusSel = document.getElementById(`filter-status`);
+      const viewSel = document.getElementById(`view-mode`);
+      if (partSel) partSel.value = appState.activePart;
+      if (statusSel) statusSel.value = appState.statusFilter;
+      if (viewSel) viewSel.value = appState.viewMode;
+    }
+
+    function renderKpis(stats) {
+      const scoreEl = document.getElementById(`kpi-score`);
+      const accEl = document.getElementById(`kpi-accuracy`);
+      const progEl = document.getElementById(`kpi-progress`);
+      const remEl = document.getElementById(`kpi-remaining`);
+      const barEl = document.getElementById(`kpi-progress-bar`);
+      const reg2El = document.getElementById(`kpi-reg2`);
+      const streakEl = document.getElementById(`kpi-streak`);
+      const masteryEl = document.getElementById(`kpi-mastery`);
+
+      if (scoreEl) scoreEl.textContent = stats.correctCount + ` / 30`;
+      if (accEl) {
+        accEl.textContent = stats.answeredCount > 0
+          ? stats.accuracy + `% accuracy (` + stats.answeredCount + ` checked)`
+          : `0% accuracy on answered items`;
+      }
+      if (progEl) progEl.textContent = stats.answeredCount + ` / 30`;
+      if (remEl) {
+        const rem = 30 - stats.answeredCount;
+        remEl.textContent = rem === 0 ? `All 30 questions completed` : rem + ` question` + (rem === 1 ? `` : `s`) + ` remaining`;
+      }
+      if (barEl) {
+        barEl.style.width = Math.round((stats.answeredCount / 30) * 100) + `%`;
+      }
+      if (reg2El) reg2El.textContent = stats.reg2Correct + ` / 4`;
+      if (streakEl) streakEl.textContent = stats.streak + ` streak`;
+      if (masteryEl) {
+        if (stats.answeredCount === 0) {
+          masteryEl.textContent = `Answer questions to track readiness`;
+        } else if (stats.answeredCount === 30 && stats.accuracy >= 80) {
+          masteryEl.textContent = `Exam ready (≥ 80% threshold met)`;
+        } else if (stats.accuracy >= 80) {
+          masteryEl.textContent = `On track (≥ 80% target)`;
+        } else {
+          masteryEl.textContent = `Review missed regulations (< 80%)`;
+        }
+      }
+
+      const reviewBtn = document.getElementById(`btn-review-missed`);
+      if (reviewBtn) {
+        reviewBtn.textContent = `Review incorrect (` + stats.incorrectCount + `)`;
+        reviewBtn.disabled = stats.incorrectCount === 0;
+      }
+    }
+
+    function renderMatrix() {
+      const matrixEl = document.getElementById(`question-matrix`);
+      if (!matrixEl) return;
+
+      let html = ``;
+      for (let i = 0; i < QUESTIONS.length; i++) {
+        const q = QUESTIONS[i];
+        const ans = appState.answers[q.id];
+        const isAnswered = typeof ans === `number`;
+        const isCorrect = isAnswered && ans === q.correct;
+        const isFlagged = appState.flagged.indexOf(q.id) !== -1;
+        const isActive = appState.viewMode === `single` && appState.currentQuestionId === q.id;
+
+        let cls = `matrix-tile`;
+        if (isAnswered) {
+          cls += isCorrect ? ` matrix-tile--correct` : ` matrix-tile--incorrect`;
+        }
+        if (isFlagged) cls += ` matrix-tile--flagged`;
+        if (isActive) cls += ` matrix-tile--active`;
+
+        const numLabel = q.id < 10 ? `0` + q.id : String(q.id);
+        const stateText = isAnswered ? (isCorrect ? `correct` : `incorrect`) : `unanswered`;
+        const flagText = isFlagged ? `, flagged` : ``;
+
+        html += `<button type="button" class="` + cls + `" onclick="jumpToQuestion(` + q.id + `)" aria-label="Question ` + q.id + `: ` + stateText + flagText + `">` + numLabel + `</button>`;
+      }
+      matrixEl.innerHTML = html;
+    }
+
+    function renderPartBreakdown() {
+      const tbody = document.getElementById(`part-breakdown-body`);
+      if (!tbody) return;
+
+      let html = ``;
+      for (let p = 0; p < PARTS.length; p++) {
+        const part = PARTS[p];
+        const partQuestions = QUESTIONS.filter(function (q) { return q.part === part.id; });
+        let correct = 0;
+        let answered = 0;
+        for (let j = 0; j < partQuestions.length; j++) {
+          const ans = appState.answers[partQuestions[j].id];
+          if (typeof ans === `number`) {
+            answered++;
+            if (ans === partQuestions[j].correct) correct++;
+          }
+        }
+        const pct = answered > 0 ? Math.round((correct / partQuestions.length) * 100) : 0;
+        const answeredPct = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+        const barCls = answered > 0 && answeredPct < 80 ? `mini-bar-fill mini-bar-fill--warn` : `mini-bar-fill`;
+
+        html += `<tr>`;
+        html += `<td><button type="button" class="part-row-btn" onclick="setPartFilter('` + part.id + `')">` + part.label + `</button></td>`;
+        html += `<td class="num">` + correct + ` / ` + partQuestions.length + `</td>`;
+        html += `<td class="num">` + (answered > 0 ? answeredPct + `%` : `—`) + `<span class="mini-bar-track" aria-hidden="true"><span class="` + barCls + `" style="width: ` + pct + `%;"></span></span></td>`;
+        html += `</tr>`;
+      }
+      tbody.innerHTML = html;
+    }
+
+    function buildQuestionCardHtml(q, isSingleMode, posIdx, totalFiltered) {
+      const userChoice = appState.answers[q.id];
+      const isAnswered = typeof userChoice === `number`;
+      const isCorrect = isAnswered && userChoice === q.correct;
+      const isFlagged = appState.flagged.indexOf(q.id) !== -1;
+      const numLabel = q.id < 10 ? `Q0` + q.id : `Q` + q.id;
+      const letters = [`A`, `B`, `C`, `D`];
+
+      const cardCls = isSingleMode ? `question-card` : `question-card question-card--list`;
+      let html = `<article class="` + cardCls + `" id="question-card-` + q.id + `">`;
+
+      html += `<div class="question-meta">`;
+      html += `<div class="question-meta-left">`;
+      html += `<span class="step-badge">` + numLabel + `</span>`;
+      html += `<span class="status-tag">` + q.reg + `</span>`;
+      if (q.part === `partA`) {
+        html += `<span class="status-tag status-tag--warning">Reg 2 Core</span>`;
+      }
+      if (isAnswered) {
+        html += isCorrect
+          ? `<span class="status-tag status-tag--positive">Correct</span>`
+          : `<span class="status-tag">Needs review</span>`;
+      }
+      html += `</div>`;
+
+      html += `<button type="button" class="button button--secondary" onclick="toggleFlag(` + q.id + `)" aria-pressed="` + (isFlagged ? `true` : `false`) + `">`;
+      html += `<svg width="16" height="16" viewBox="0 0 24 24" fill="` + (isFlagged ? `currentColor` : `none`) + `" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>`;
+      html += isFlagged ? `Flagged` : `Flag for review`;
+      html += `</button>`;
+      html += `</div>`;
+
+      html += `<h2 class="question-stem">` + q.stem + `</h2>`;
+
+      html += `<div class="options-list" role="group" aria-label="Answer choices for question ` + q.id + `">`;
+      for (let idx = 0; idx < q.options.length; idx++) {
+        let optCls = `option-btn`;
+        let statusMarkup = ``;
+
+        if (isAnswered) {
+          if (idx === q.correct) {
+            optCls += ` option-btn--correct`;
+            statusMarkup = `<span class="option-status-icon option-status-icon--correct"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Correct</span>`;
+          } else if (idx === userChoice) {
+            optCls += ` option-btn--incorrect`;
+            statusMarkup = `<span class="option-status-icon option-status-icon--incorrect"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Your answer</span>`;
+          }
+        }
+
+        html += `<button type="button" class="` + optCls + `" ` + (isAnswered ? `disabled` : ``) + ` onclick="selectOption(` + q.id + `, ` + idx + `)">`;
+        html += `<span class="option-letter">` + letters[idx] + `</span>`;
+        html += `<span>` + q.options[idx] + `</span>`;
+        html += statusMarkup;
+        html += `</button>`;
+      }
+      html += `</div>`;
+
+      if (isAnswered) {
+        const expCls = isCorrect ? `explanation-box explanation-box--correct` : `explanation-box explanation-box--incorrect`;
+        const verdictCls = isCorrect ? `verdict-text verdict-text--correct` : `verdict-text verdict-text--incorrect`;
+        const verdictLabel = isCorrect
+          ? `Correct — ` + letters[q.correct]
+          : `Incorrect — Correct answer is ` + letters[q.correct];
+
+        html += `<div class="` + expCls + `">`;
+        html += `<div class="explanation-header">`;
+        html += `<span class="` + verdictCls + `">` + verdictLabel + `</span>`;
+        html += `<span class="status-tag">` + q.reg + `</span>`;
+        html += `</div>`;
+        html += `<p class="explanation-body">` + q.explanation + `</p>`;
+        html += `</div>`;
+      }
+
+      if (isSingleMode) {
+        html += `<div class="quiz-nav-row">`;
+        html += `<button type="button" class="button button--secondary" onclick="stepQuestion(-1)" ` + (posIdx <= 0 ? `disabled` : ``) + `>Previous question</button>`;
+        if (posIdx < totalFiltered - 1) {
+          html += `<button type="button" class="button" onclick="stepQuestion(1)">Next question</button>`;
+        } else {
+          html += `<button type="button" class="button" onclick="jumpToNextUnanswered()">Next unanswered</button>`;
+        }
+        if (isAnswered) {
+          html += `<button type="button" class="button button--outline" onclick="clearSingleAnswer(` + q.id + `)">Retry this question</button>`;
+        }
+        html += `<span class="source-note">Showing ` + (posIdx + 1) + ` of ` + totalFiltered + ` matching questions</span>`;
+        html += `</div>`;
+      } else if (isAnswered) {
+        html += `<div class="quiz-nav-row">`;
+        html += `<button type="button" class="button button--outline" onclick="clearSingleAnswer(` + q.id + `)">Retry this question</button>`;
+        html += `</div>`;
+      }
+
+      html += `</article>`;
+      return html;
+    }
+
+    function renderQuizArea() {
+      const container = document.getElementById(`quiz-container`);
+      if (!container) return;
+
+      const filtered = getFilteredQuestions();
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="empty-state">
+          <h3>No questions match the current filters</h3>
+          <p>Change the GSIUR Part or status filter to return to your revision set.</p>
+          <button type="button" class="button" onclick="clearFilters()">Show all 30 questions</button>
+        </div>`;
+        return;
+      }
+
+      if (appState.viewMode === `single`) {
+        let posIdx = -1;
+        for (let i = 0; i < filtered.length; i++) {
+          if (filtered[i].id === appState.currentQuestionId) {
+            posIdx = i;
+            break;
+          }
+        }
+        if (posIdx === -1) {
+          posIdx = 0;
+          appState.currentQuestionId = filtered[0].id;
+        }
+        container.innerHTML = buildQuestionCardHtml(filtered[posIdx], true, posIdx, filtered.length);
+      } else {
+        let html = ``;
+        for (let i = 0; i < filtered.length; i++) {
+          html += buildQuestionCardHtml(filtered[i], false, i, filtered.length);
+        }
+        container.innerHTML = html;
+      }
+    }
+
+    function renderAll() {
+      syncControlValues();
+      const stats = computeStats();
+      renderKpis(stats);
+      renderQuizArea();
+      renderMatrix();
+      renderPartBreakdown();
+    }
+
+    function selectOption(questionId, optionIndex) {
+      if (typeof appState.answers[questionId] === `number`) return;
+      appState.answers[questionId] = optionIndex;
+      appState.currentQuestionId = questionId;
+      clearActionFeedback();
+      renderAll();
+      persistState();
+    }
+
+    function clearSingleAnswer(questionId) {
+      delete appState.answers[questionId];
+      appState.currentQuestionId = questionId;
+      clearActionFeedback();
+      renderAll();
+      persistState();
+    }
+
+    function toggleFlag(questionId) {
+      const idx = appState.flagged.indexOf(questionId);
+      if (idx === -1) {
+        appState.flagged.push(questionId);
+      } else {
+        appState.flagged.splice(idx, 1);
+      }
+      renderAll();
+      persistState();
+    }
+
+    function setPartFilter(partId) {
+      appState.activePart = partId;
+      const filtered = getFilteredQuestions();
+      if (filtered.length > 0) {
+        appState.currentQuestionId = filtered[0].id;
+      }
+      clearActionFeedback();
+      renderAll();
+      persistState();
+    }
+
+    function setStatusFilter(status) {
+      appState.statusFilter = status;
+      const filtered = getFilteredQuestions();
+      if (filtered.length > 0) {
+        appState.currentQuestionId = filtered[0].id;
+      }
+      clearActionFeedback();
+      renderAll();
+      persistState();
+    }
+
+    function setViewMode(mode) {
+      appState.viewMode = mode;
+      clearActionFeedback();
+      renderAll();
+      persistState();
+    }
+
+    function clearFilters() {
+      appState.activePart = `all`;
+      appState.statusFilter = `all`;
+      appState.currentQuestionId = 1;
+      clearActionFeedback();
+      renderAll();
+      persistState();
+    }
+
+    function jumpToQuestion(questionId) {
+      appState.currentQuestionId = questionId;
+      const filtered = getFilteredQuestions();
+      let found = false;
+      for (let i = 0; i < filtered.length; i++) {
+        if (filtered[i].id === questionId) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        appState.activePart = `all`;
+        appState.statusFilter = `all`;
+      }
+      renderAll();
+      persistState();
+      if (appState.viewMode === `list`) {
+        const card = document.getElementById(`question-card-` + questionId);
+        if (card) card.scrollIntoView({ behavior: `smooth`, block: `start` });
+      }
+    }
+
+    function stepQuestion(delta) {
+      const filtered = getFilteredQuestions();
+      if (filtered.length === 0) return;
+      let idx = 0;
+      for (let i = 0; i < filtered.length; i++) {
+        if (filtered[i].id === appState.currentQuestionId) {
+          idx = i;
+          break;
+        }
+      }
+      const nextIdx = Math.max(0, Math.min(filtered.length - 1, idx + delta));
+      appState.currentQuestionId = filtered[nextIdx].id;
+      renderAll();
+      persistState();
+    }
+
+    function jumpToNextUnanswered() {
+      for (let i = 0; i < QUESTIONS.length; i++) {
+        if (typeof appState.answers[QUESTIONS[i].id] !== `number`) {
+          appState.activePart = `all`;
+          appState.statusFilter = `all`;
+          appState.viewMode = `single`;
+          appState.currentQuestionId = QUESTIONS[i].id;
+          renderAll();
+          persistState();
+          return;
+        }
+      }
+      setActionFeedback(`All 30 questions have been answered.`);
+    }
+
+    function reviewMissedQuestions() {
+      appState.activePart = `all`;
+      appState.statusFilter = `incorrect`;
+      appState.viewMode = `single`;
+      const filtered = getFilteredQuestions();
+      if (filtered.length > 0) {
+        appState.currentQuestionId = filtered[0].id;
+      }
+      setActionFeedback(filtered.length + ` incorrect question` + (filtered.length === 1 ? `` : `s`) + ` loaded for review.`);
+      renderAll();
+      persistState();
+    }
+
+    function handleResetClick(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Click again to confirm reset`;
+        setActionFeedback(`Click "Click again to confirm reset" to clear all saved answers.`);
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.textContent = `Reset all answers`;
+      appState.answers = {};
+      appState.flagged = [];
+      appState.activePart = `all`;
+      appState.statusFilter = `all`;
+      appState.currentQuestionId = 1;
+      setActionFeedback(`All answers and flags cleared.`);
+      renderAll();
+      persistState();
+    }
+
+    function clearActionFeedback() {
+      const resetBtn = document.getElementById(`btn-reset-quiz`);
+      if (resetBtn && resetBtn.dataset.armed === `true`) {
+        resetBtn.dataset.armed = `false`;
+        resetBtn.textContent = `Reset all answers`;
+      }
+      setActionFeedback(``);
+    }
+
+    function setActionFeedback(msg) {
+      const el = document.getElementById(`action-feedback`);
+      if (el) el.textContent = msg;
+    }
+
+    function csvEscape(val) {
+      const str = String(val).replace(/"/g, `""`);
+      return `"` + str + `"`;
+    }
+
+    function exportRevisionCsv() {
+      const letters = [`A`, `B`, `C`, `D`];
+      const rows = [
+        [`Question`, `GSIUR Regulation`, `Topic`, `Your Answer`, `Correct Answer`, `Result`, `Flagged`]
+      ];
+      for (let i = 0; i < QUESTIONS.length; i++) {
+        const q = QUESTIONS[i];
+        const ans = appState.answers[q.id];
+        const isAnswered = typeof ans === `number`;
+        const yourStr = isAnswered ? letters[ans] + `: ` + q.options[ans] : `Unanswered`;
+        const corrStr = letters[q.correct] + `: ` + q.options[q.correct];
+        const resStr = !isAnswered ? `Unanswered` : (ans === q.correct ? `Correct` : `Incorrect`);
+        const flagStr = appState.flagged.indexOf(q.id) !== -1 ? `Yes` : `No`;
+        rows.push([
+          `Q` + q.id,
+          q.reg,
+          q.topic,
+          yourStr,
+          corrStr,
+          resStr,
+          flagStr
+        ]);
+      }
+
+      const csvLines = rows.map(function (r) {
+        return r.map(csvEscape).join(`,`);
+      });
+      const csvContent = csvLines.join(`\n`);
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: csvContent,
+          contentType: `text/csv`,
+          encoding: `UTF-8`,
+          filename: `gsiur_1998_revision_results.csv`
+        });
+        setActionFeedback(`Exported 30-question revision report to CSV.`);
+      } else {
+        setActionFeedback(`CSV export requires the Gemini Notebook host environment.`);
+      }
+    }
+
+    async function initDashboard() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === `object`) {
+            if (saved.answers && typeof saved.answers === `object`) appState.answers = saved.answers;
+            if (Array.isArray(saved.flagged)) appState.flagged = saved.flagged;
+            if (typeof saved.activePart === `string`) appState.activePart = saved.activePart;
+            if (typeof saved.statusFilter === `string`) appState.statusFilter = saved.statusFilter;
+            if (typeof saved.viewMode === `string`) appState.viewMode = saved.viewMode;
+            if (typeof saved.currentQuestionId === `number`) appState.currentQuestionId = saved.currentQuestionId;
+          }
+        } catch (err) {
+          /* Start fresh if state cannot be read */
+        }
+      }
+
+      renderAll();
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    initDashboard();
+  </script>
+</body>
+</html>
